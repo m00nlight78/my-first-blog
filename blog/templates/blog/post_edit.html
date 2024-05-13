@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}<!-- extension de la template de base (dans le sens de template generale), nommee base.html-->
+{% block content %}
+<h2>New post</h2>
+<form method="POST" class="post-form">
+    <!-- En resume cette ligne definit les proprietes de base du formulaire, comme la methode de soumission ('POST') et eventuellement
+    une classe CSS pour appliquer des styles particuliers a ce formulaire via ('post-form') par ex (voir fichier .css) -->
+
+    {% csrf_token %} <!-- permet de securiser le formulaire -->
+    {{ form.as_p }}
+    <!-- Cette ligne utilise la variable form pour afficher les champs du formulaire
+    form.as_p est une methode fournie par Django qui affiche chaque champ du formulaire sous la forme d'un paragraphe HTML -->
+
+
+    <button type="submit" class="save btn btn-default">Save</button>
+    <!-- Ceci est un bouton de soumission du formulaire. Lorsque l'utilisateur clique sur ce bouton,
+    le formulaire sera soumis et les donnees envoyees au serveur. On a nomme ce bouton 'Save' -->
+
+
+</form>
+{% endblock %}
+
+
+<!--ATTENTION ICI GROSSE CONFUSION A EVITER  dans cette ligne sont presents des elements ou variables qui sont similaires a des parametres que nous utilisons, je m'explique :
+    l'element form n'a rien a voir (au niveau du nom je veux dire) avec le nom que l'on a donne a notre formulaire. C'est simplement une balise qui marque
+    le debut et la fin du formulaire HTML. Il permet d'encapsuler les elements du formulaire et de definir comment les donnees saisies dans ces elements seront envoyees
+    au serveur. Ensuite le deuxieme element qui peut porter confusion est le nom de la methode que l'on utilise : 'POST'. Cet attribut specifie la methode HTTP utilisee pour
+    envoyer les donnees du formulaire au serveur. Dans notre cas, on utilise la methode 'POST' (rien a voir avec notre modele 'Post'). Lorsqu'un formulaire est soumis avec la
+    methode POST, les donnees du formulaire sont incluses dans le corps de la requete HTTP et envoyees au serveur de maniere securisee. Methode plus securisee que la methode GET ' -->

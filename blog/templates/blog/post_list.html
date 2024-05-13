@@ -1,0 +1,19 @@
+﻿<!-- RAPPEL : Afin d'afficher une variable dans un template Django, on utilise les doubles accolades avec le nom de la variable à l'intérieur
+    Nous accédons aux données associées à chaque champ défini dans notre modèle Post avec un point tel que "post.title". De même, le |linebreaksbr nous permet de rediriger
+    le texte des posts à travers un filtre qui convertit automatiquement les fins de lignes en paragraphes.-->
+
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+            <time class="date">
+                {{ post.published_date }}
+            </time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
+
